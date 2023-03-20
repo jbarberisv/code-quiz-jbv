@@ -1,5 +1,7 @@
 
-//Object
+//global
+var time = 60;
+
 
 // var questions = []; Array  = [1,3,5,6,7]
 var questions = [ 
@@ -63,11 +65,12 @@ var questions = [
     }
 ]
 
+var elAlert =  document.querySelector("#alert");
+
 var elTimer = document.querySelector("#timer");
 console.log(elTimer);
 
 function qTimer() {
-  var time = 60;
   function countdown() {
     if (time > 0) {
       time--;
@@ -85,12 +88,17 @@ function qTimer() {
 
 function generateQuestions() {
     var option = [];
-    for (let i = 0; i < questions.length; i++) {        
+    var qlength = questions.length;
+    var i = 0;
+
+    function ask(length) {
         var elQuestionDiv = document.querySelector("#question-text"); // Grab Div
         var elQuestionH2 = document.createElement("h2"); // Create H2
         elQuestionH2.textContent = questions[i].question; // Add text
         elQuestionDiv?.appendChild(elQuestionH2); // Append to the div
         
+   
+
         for (let j = 0; j < questions[i].answers.length; j++) {
             var elDivAnswers = document.querySelector("#answers");
             var elButtonAnswer  = document.createElement("button");
@@ -100,20 +108,43 @@ function generateQuestions() {
             
             document.addEventListener("click", selection );
          }
+        
+        function childKiller() {
+            elQuestionDiv?.removeChild(elQuestionH2);
+            var elDivAnswers = document.querySelector("#answers");
+            elDivAnswers.innerHTML = '';
+           
+        }
          
         function selection(e) {
             var userAnswer = e?.target.getAttribute("title");
-            
-            if (userAnswer === questions[i].answer) {
-                console.log(true)
-            } else {
-                console.log(false)
 
+            qlength--;
+
+            if (userAnswer === questions[i].answer) {
+                elAlert.textContent= "Correct!";
+                childKiller();
+                i++;
+                ask(qlength);
+                
+            } else {
+                elAlert.textContent= "Incorrect! You lost 10 sec.";
+                childKiller();
+                time = time - 10;
+                i++;
+                ask(qlength);
             }
             
         }
-        return;
-    }
+
+    }     
+    
+    if (qlength > 0) {
+        ask(qlength);
+    } 
+
+       
+    
   
 }
 
