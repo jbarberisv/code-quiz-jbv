@@ -68,7 +68,6 @@ var questions = [
 var elAlert =  document.querySelector("#alert");
 
 var elTimer = document.querySelector("#timer");
-console.log(elTimer);
 
 function qTimer() {
   function countdown() {
@@ -110,10 +109,11 @@ function generateQuestions() {
          }
         
         function childKiller() {
-            elQuestionDiv?.removeChild(elQuestionH2);
+            elQuestionDiv.removeChild(elQuestionH2);
             var elDivAnswers = document.querySelector("#answers");
             elDivAnswers.innerHTML = '';
-           
+               
+
         }
          
         function selection(e) {
@@ -121,27 +121,49 @@ function generateQuestions() {
 
             qlength--;
 
+            // function nextQuestion() {
+            //     i++;
+            //     if (i <= qlength) {
+            //         ask(qlength);
+            //     } else {
+            //         window.location.replace("./scores.html");
+            //     }
+            // }
+            console.log(i, qlength);
             if (userAnswer === questions[i].answer) {
+                
                 elAlert.textContent= "Correct!";
                 childKiller();
                 i++;
-                ask(qlength);
+                if (i === qlength ) {
+                    window.location.replace("./scores.html");
+                } else {
+                    ask(qlength);
+
+                }
+
                 
             } else {
                 elAlert.textContent= "Incorrect! You lost 10 sec.";
                 childKiller();
                 time = time - 10;
                 i++;
-                ask(qlength);
+                if (i === qlength) {
+                    window.location.replace("./scores.html");
+
+                } else {
+                    ask(qlength);
+
+                }
             }
             
         }
 
     }     
     
-    if (qlength > 0) {
-        ask(qlength);
-    } 
+    // if (qlength > 0) {
+    //     ask(qlength);
+    // } 
 
        
     
