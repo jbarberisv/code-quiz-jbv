@@ -77,6 +77,8 @@ function qTimer() {
         elTimer.textContent = "Time: " + time;
       }
       setTimeout(countdown, 1000);
+    } else {
+        window.location.replace("./scores.html");
     }
   }
   countdown();
@@ -123,12 +125,6 @@ function generateQuestions() {
          
         function selection(e) {
             var userAnswer = e?.target.getAttribute("title");
-
-            function endGame(params) {
-                var elFormDiv = document.querySelector("#form");
-                elFormDiv.classList.add("initial-form");
-
-            }
 
             if (userAnswer === questions[i].answer) {
                 
@@ -191,7 +187,13 @@ function storeInitials(event) {
     
 }
 
- qTimer();
+function endGame() {
+    var elFormDiv = document.querySelector("#form");
+    elFormDiv.classList.add("initial-form");
+
+}
+
+qTimer();
 
 generateQuestions();
 
