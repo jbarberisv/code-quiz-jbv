@@ -9,7 +9,7 @@ I created a code pop quiz using Html, CSS and JavaScript.
 The quiz has a 60 second time limit and for every wrong question you get the time will take 10 seconds from the time resting. At the end of the quiz, the page will ask you to write down your inicials so it can save up your scores.
 ## Screenshot
 
-![alt screenshot]()
+![alt screenshot](https://github.com/jbarberisv/code-quiz-jbv/blob/main/assets/images/web.png?raw=true)
 
 
 ## Features and Technology
@@ -20,7 +20,7 @@ The quiz has a 60 second time limit and for every wrong question you get the tim
   
 
 ## Deployment
-[Click Here](https://jbarberisv.github.io/refactor-jb-horiseon/) to view the final result.
+[Click Here](https://jbarberisv.github.io/code-quiz-jbv/) to view the final result.
 
 
 ## Credits
