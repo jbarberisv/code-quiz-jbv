@@ -20,3 +20,12 @@ div button {
     font-size: medium;
 
 }
+
+.initial-form-hidden {
+    display: none;
+}
+
+.initial-form {
+    display: block;
+}
+

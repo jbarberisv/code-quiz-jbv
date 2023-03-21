@@ -90,6 +90,8 @@ function generateQuestions() {
     var qlength = questions.length;
     var i = 0;
 
+
+
     function ask(length) {
         var elQuestionDiv = document.querySelector("#question-text"); // Grab Div
         var elQuestionH2 = document.createElement("h2"); // Create H2
@@ -115,28 +117,27 @@ function generateQuestions() {
                
 
         }
+
+
+
          
         function selection(e) {
             var userAnswer = e?.target.getAttribute("title");
 
-            qlength--;
+            function endGame(params) {
+                var elFormDiv = document.querySelector("#form");
+                elFormDiv.classList.add("initial-form");
 
-            // function nextQuestion() {
-            //     i++;
-            //     if (i <= qlength) {
-            //         ask(qlength);
-            //     } else {
-            //         window.location.replace("./scores.html");
-            //     }
-            // }
-            console.log(i, qlength);
+            }
+
             if (userAnswer === questions[i].answer) {
                 
+
                 elAlert.textContent= "Correct!";
                 childKiller();
                 i++;
                 if (i === qlength ) {
-                    window.location.replace("./scores.html");
+                    endGame();
                 } else {
                     ask(qlength);
 
@@ -149,8 +150,7 @@ function generateQuestions() {
                 time = time - 10;
                 i++;
                 if (i === qlength) {
-                    window.location.replace("./scores.html");
-
+                    endGame();
                 } else {
                     ask(qlength);
 
@@ -161,13 +161,34 @@ function generateQuestions() {
 
     }     
     
-    // if (qlength > 0) {
-    //     ask(qlength);
-    // } 
+    if (qlength > 0) {
+        ask(qlength);
+    } 
 
        
     
   
+}
+
+function storeInitials(event) {
+    event.preventDefault();
+    var userInitials = document.getElementById('user').value;
+    var scores = localStorage.getItem('scores');
+    if (scores) {
+        scores = JSON.parse(scores); // Transform in object
+    } else {
+        scores = [];
+    }
+
+    scores.push({user: userInitials, score: time}); 
+    
+    scores = JSON.stringify(scores);
+
+    localStorage.removeItem('scores');
+    localStorage.setItem('scores', scores);
+
+    window.location.replace("./scores.html");
+    
 }
 
  qTimer();
